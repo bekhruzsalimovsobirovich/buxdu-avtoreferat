@@ -29,7 +29,7 @@ class StoreTeacherRequest extends FormRequest
             'surname' => 'required|string|max:255',
             'phone' => 'required',
             'employee_id_number' => 'required|unique:users,employee_id_number',
-            'type' => 'required|in:dsc,phd',
+            'type' => 'required|in:tayanch-doktorant','mustaqil-izlanuvchi',
         ];
     }
 }

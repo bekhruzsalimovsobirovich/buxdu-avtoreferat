@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Documents\DocumentController;
 use App\Http\Controllers\Hemis\HemisController;
 use App\Http\Controllers\Teachers\TeacherController;
 use Illuminate\Http\Request;
@@ -32,9 +33,14 @@ Route::get('departments/{faculty_id}',[HemisController::class,'getAllDepartments
 
 Route::group(['middleware' => ['auth:sanctum']],function () {
     Route::post('logout', [LoginController::class, 'logout']);
-
+    Route::get('documents',[DocumentController::class,'index']);
 
     Route::group(['prefix' => 'admin','middleware' => ['role:admin']],function () {
         Route::get('teachers/{department_id}',[TeacherController::class,'getAllTeacher']);
+        Route::post('documents/{document}/check',[DocumentController::class,'checkDocument']);
+    });
+
+    Route::group(['prefix' => 'teacher','middleware' => ['role:teacher']],function () {
+        Route::post('documents',[DocumentController::class,'store']);
     });
 });

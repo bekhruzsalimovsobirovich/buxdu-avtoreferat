@@ -28,7 +28,7 @@ return new class extends Migration
                 ->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('avatar')->nullable();
             $table->string('phone')->nullable();
-            $table->enum('type',['dsc','phd'])->nullable();
+            $table->enum('type',['tayanch-doktorant','mustaqqil-izlanuvchi'])->nullable();
             $table->timestamps();
         });
     }
