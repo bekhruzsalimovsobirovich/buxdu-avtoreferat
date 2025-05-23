@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use App\Domain\Departments\Models\Department;
 use App\Domain\Faculties\Models\Faculty;
-use App\Models\University;
+use App\Domain\Universities\Models\University;
 use App\Models\User;
 use App\Models\UserProfile;
 use GuzzleHttp\Client;
@@ -74,30 +74,19 @@ class HemisSeeder extends Seeder
             'employee_id_number' => 1,
         ],[
             'login' => 'admin',
-            'full_name' => 'Admin',
-            'short_name' => 'Admin',
+            'firstname' => 'Admin',
+            'lastname' => 'Admin',
+            'surname' => 'Admin',
             'password' => 'adminatm2025',
         ]);
 
-//        $teacher = User::updateOrCreate([
-//            'id' => 2,
-//            'employee_id_number' => 3042311060,
-//        ],[
-//            'login' => 3042311060,
-//            'full_name' => 'SALIMOV BEHRUZBEK SOBIROVICH',
-//            'short_name' => 'SALIMOV B.S',
-//            'password' => 3042311060
-//        ]);
-
         UserProfile::updateOrCreate([
             'user_id' => $user->id,
+        ],[
+            'university_id' => University::query()->where('code',304)->first()->id,
         ]);
-//        UserProfile::updateOrCreate([
-//            'user_id' => $teacher->id,
-//        ]);
 
         $user->assignRole($roleAdmin->name);
-//        $teacher->assignRole('teacher');
     }
 
     /**
@@ -121,8 +110,9 @@ class HemisSeeder extends Seeder
                         'employee_id_number' => $dt->employee_id_number,
                     ],[
                         'login' => $dt->employee_id_number,
-                        'full_name' => $dt->full_name,
-                        'short_name' => $dt->short_name,
+                        'firstname' => $dt->first_name,
+                        'lastname' => $dt->second_name,
+                        'surname' => $dt->third_name,
                         'password' => $dt->employee_id_number,
                     ]);
 
@@ -130,7 +120,8 @@ class HemisSeeder extends Seeder
                         'user_id' => $user->id,
                     ],[
                         'department_id' => $dt->department->id,
-                        'avatar' => $dt->image,
+                        'university_id' => University::query()->where('code',304)->first()->id,
+                        'avatar' => $dt->image
                     ]);
 
                     $user->assignRole('teacher');
@@ -158,8 +149,9 @@ class HemisSeeder extends Seeder
                                 'employee_id_number' => $dt->employee_id_number,
                             ],[
                                 'login' => $dt->employee_id_number,
-                                'full_name' => $dt->full_name,
-                                'short_name' => $dt->short_name,
+                                'firstname' => $dt->first_name,
+                                'lastname' => $dt->second_name,
+                                'surname' => $dt->third_name,
                                 'password' => $dt->employee_id_number,
                             ]);
 
@@ -167,7 +159,8 @@ class HemisSeeder extends Seeder
                                 'user_id' => $user->id,
                             ],[
                                 'department_id' => $dt->department->id,
-                                'avatar' => $dt->image,
+                                'university_id' => University::query()->where('code',304)->first()->id,
+                                'avatar' => $dt->image
                             ]);
 
                             $user->assignRole('teacher');

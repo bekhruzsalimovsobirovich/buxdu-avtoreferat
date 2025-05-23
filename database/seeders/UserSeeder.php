@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Domain\Universities\Models\University;
 use App\Models\User;
 use App\Models\UserProfile;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -18,14 +18,16 @@ class UserSeeder extends Seeder
             'employee_id_number' => '3042311060',
         ],[
             'login' => '3042311060',
-            'full_name' => 'SALIMOV BEHRUZBEK SOBIROVICH',
-            'short_name' => 'SALIMOV B.S',
+            'firstname' => 'BEHRUZBEK',
+            'lastname' => 'SALIMOV',
+            'surname' => 'SOBIROVICH',
             'password' => '3042311060'
         ]);
         UserProfile::updateOrCreate([
             'user_id' => $teacher->id,
         ],[
-            'department_id' => 16
+            'department_id' => 16,
+            'university_id' => University::query()->where('code',304)->first()->id,
         ]);
 
         $teacher->assignRole('teacher');

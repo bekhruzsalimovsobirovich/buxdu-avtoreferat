@@ -1,6 +1,7 @@
 <?php
 
 use App\Domain\Departments\Models\Department;
+use App\Domain\Universities\Models\University;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -18,7 +19,7 @@ return new class extends Migration
             $table->foreignIdFor(User::class)
                 ->index()
                 ->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignIdFor(\App\Models\University::class)
+            $table->foreignIdFor(University::class)
                 ->index()
                 ->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignIdFor(Department::class)
@@ -26,6 +27,8 @@ return new class extends Migration
                 ->index()
                 ->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('avatar')->nullable();
+            $table->string('phone')->nullable();
+            $table->enum('type',['dsc','phd'])->nullable();
             $table->timestamps();
         });
     }

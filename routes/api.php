@@ -24,6 +24,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('login',[LoginController::class,'login']);
 Route::post('login/hemis',[HemisController::class,'checkHemisAuth'])->middleware('cors');
 
+Route::post('register',[TeacherController::class,'store']);
+
+Route::get('universities',[HemisController::class,'getAllUniversities']);
 Route::get('faculties',[HemisController::class,'getAllFaculties']);
 Route::get('departments/{faculty_id}',[HemisController::class,'getAllDepartments']);
 

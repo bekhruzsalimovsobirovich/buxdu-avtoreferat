@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Hemis;
 use App\Domain\Departments\Repositories\DepartmentRepository;
 use App\Domain\Departments\Resources\DepartmentResource;
 use App\Domain\Faculties\Resources\FacultyResource;
-use App\Domain\Subjects\Resources\SubjectResource;
 use App\Domain\Faculties\Repositories\FacultyRepository;
-use App\Domain\Subjects\Repositories\SubjectRepository;
+use App\Domain\Universities\Repositories\UniversityRepository;
+use App\Domain\Universities\Resources\UniversityResource;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Models\SessionState;
@@ -15,9 +15,7 @@ use App\Models\User;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use League\OAuth2\Client\Provider\GenericProvider;
 
@@ -34,13 +32,20 @@ class HemisController extends Controller
     public mixed $departments;
 
     /**
+     * @var mixed|UniversityRepository
+     */
+    public mixed $universities;
+
+    /**
      * @param FacultyRepository $facultyRepository
+     * @param UniversityRepository $universityRepository
      * @param DepartmentRepository $departmentRepository
      */
-    public function __construct(FacultyRepository $facultyRepository, DepartmentRepository $departmentRepository)
+    public function __construct(FacultyRepository $facultyRepository, UniversityRepository $universityRepository, DepartmentRepository $departmentRepository)
     {
         $this->faculties = $facultyRepository;
         $this->departments = $departmentRepository;
+        $this->universities = $universityRepository;
     }
 
     /**
@@ -49,6 +54,14 @@ class HemisController extends Controller
     public function getAllFaculties()
     {
         return $this->successResponse('',FacultyResource::collection($this->faculties->getAllFaculties()));
+    }
+
+    /**
+     * @return JsonResponse
+     */
+    public function getAllUniversities()
+    {
+        return $this->successResponse('',UniversityResource::collection($this->universities->getAllUniversities()));
     }
 
     /**
