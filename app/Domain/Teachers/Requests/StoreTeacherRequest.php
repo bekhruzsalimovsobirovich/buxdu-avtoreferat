@@ -24,12 +24,12 @@ class StoreTeacherRequest extends FormRequest
     {
         return [
             'university_id' => 'required|exists:universities,id',
-            'firstname' => 'required|string|max:255',
-            'lastname' => 'required|string|max:255',
-            'surname' => 'required|string|max:255',
+            'firstname' => 'required|string',
+            'lastname' => 'required|string',
+            'surname' => 'required|string',
             'phone' => 'required',
             'employee_id_number' => 'required|unique:users,employee_id_number',
-            'type' => 'required|in:tayanch-doktorant','mustaqil-izlanuvchi',
+            'type' => 'required',
         ];
     }
 }
