@@ -60,12 +60,8 @@ class DocumentController extends Controller
     {
         if (Auth::check() && Auth::user()->hasRole('admin')) {
             $request->validate([
-                'status' => 'required|in:approved,rejected',
+                'status' => 'required',
                 'description' => 'nullable|string',
-            ]);
-
-            $document->update([
-                'status' => $request->status,
             ]);
 
             $document->histories()->create([

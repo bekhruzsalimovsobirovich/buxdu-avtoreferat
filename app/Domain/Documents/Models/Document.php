@@ -10,8 +10,6 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Document extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
         'user_id',
         'subject',
