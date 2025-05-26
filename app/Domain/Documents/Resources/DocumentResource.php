@@ -25,7 +25,6 @@ class DocumentResource extends JsonResource
             'year' => $this->year,
             'page' => $this->page,
             'lang' => $this->lang,
-            'status' => $this->status,
             'description' => $this->description,
             'teacher' => new TeacherResource($this->teacher),
             'files' => FileResource::collection($this->files),
