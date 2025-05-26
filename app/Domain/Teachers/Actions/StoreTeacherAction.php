@@ -33,6 +33,8 @@ class StoreTeacherAction
                 'type' => $dto->getType(),
                 'university_id' => $dto->getUniversityId(),
             ]);
+
+            $teacher->assignRole('teacher');
         }catch (Exception $exception){
             DB::rollBack();
             throw $exception;
