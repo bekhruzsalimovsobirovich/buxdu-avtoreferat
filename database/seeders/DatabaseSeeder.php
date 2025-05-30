@@ -21,7 +21,9 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             HemisSeeder::class,
-            UserSeeder::class
+            UserSeeder::class,
+            CouncilSeeder::class,
+            ScienceSeeder::class
         ]);
     }
 }
